@@ -1,16 +1,1240 @@
-document.querySelectorAll('.image-upload').forEach(input => {
-    input.addEventListener('change', function () {
-        const container = this.parentElement;
-        if (this.files && this.files[0]) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                container.style.backgroundImage = `url(${e.target.result})`;
-            };
-            reader.readAsDataURL(this.files[0]);
-        } else {
-            container.style.backgroundImage = '';
-        }
-    });
+
+// Global Vue instance for shared data
+const indexApp = new Vue({
+    data: {
+        upcomingTrips: [],
+    },
+});
+
+// Create a Vue instance for the "index.html" page
+new Vue({
+    el: '#app',
+    data: {
+        upcomingTrips: indexApp.upcomingTrips,
+    },
+});
+
+// Create a Vue instance for the "library.html" page
+new Vue({
+    el: '#app-library',
+    data: {
+        searchQuery: '',
+        selectedCard: null,
+        descriptionInput: '',
+        cards: [
+            {
+                id: 1,
+                title: 'Afghanistan',
+                image: 'Images/Afghanistan.png',
+                description: '',
+            },
+            {
+                id: 2,
+                title: 'Albania',
+                image: 'Images/Albania.png',
+                description: '',
+            },
+            {
+                id: 3,
+                title: 'Algeria',
+                image: 'Images/Algeria.png',
+                description: '',
+            },
+            {
+                id: 4,
+                title: 'Andorra',
+                image: 'Images/Andorra.png',
+                description: '',
+            },
+            {
+                id: 5,
+                title: 'Angola',
+                image: 'Images/Angola.png',
+                description: '',
+            },
+            {
+                id: 6,
+                title: 'Antigua',
+                image: 'Images/Antigua.png',
+                description: '',
+            },
+            {
+                id: 7,
+                title: 'Argentina',
+                image: 'Images/Argentina.png',
+                description: '',
+            },
+            {
+                id: 8,
+                title: 'Armenia',
+                image: 'Images/Armenia.png',
+                description: '',
+            },
+            {
+                id: 9,
+                title: 'Australia',
+                image: 'Images/Australia.png',
+                description: '',
+            },
+            {
+                id: 10,
+                title: 'Austria',
+                image: 'Images/Austria.png',
+                description: '',
+            },
+            {
+                id: 11,
+                title: 'Azerbaijan',
+                image: 'Images/Azerbaijan.png',
+                description: '',
+            },
+            {
+                id: 12,
+                title: 'Bahamas',
+                image: 'Images/Bahamas.png',
+                description: '',
+            },
+            {
+                id: 13,
+                title: 'Bahrain',
+                image: 'Images/Bahrain.png',
+                description: '',
+            },
+            {
+                id: 14,
+                title: 'Bangladesh',
+                image: 'Images/Bangladesh.png',
+                description: '',
+            },
+            {
+                id: 15,
+                title: 'Barbados',
+                image: 'Images/Barbados.png',
+                description: '',
+            },
+            {
+                id: 16,
+                title: 'Belarus',
+                image: 'Images/Belarus.png',
+                description: '',
+            },
+            {
+                id: 17,
+                title: 'Belgium',
+                image: 'Images/Belgium.png',
+                description: '',
+            },
+            {
+                id: 18,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 19,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 20,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 21,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 22,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 23,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 24,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 25,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 26,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 27,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 28,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 29,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 30,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 31,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 32,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 33,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 34,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 35,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 36,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 37,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 38,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 39,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 40,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 41,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 42,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 43,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 44,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 45,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 46,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 47,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 48,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 49,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 50,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 51,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 52,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 53,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 54,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 55,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 56,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 57,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 58,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 59,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 60,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 61,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 62,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 63,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 64,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 65,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 66,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 67,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 68,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 69,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 70,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 71,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 72,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 73,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 74,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 75,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 76,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 77,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 78,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 79,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 80,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 81,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 82,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 83,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 84,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 85,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 86,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 87,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 88,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 89,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 90,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 91,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 92,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 93,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 94,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 95,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 96,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 97,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 98,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 99,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 100,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 101,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 102,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 103,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 104,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 105,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 106,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 107,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 108,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 109,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 110,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 111,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 112,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 113,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 114,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 115,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 116,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 117,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 118,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 119,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 120,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 121,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 122,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 123,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 124,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 125,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 126,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 127,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 128,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 129,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 130,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 131,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 132,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 133,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 134,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 135,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 136,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 137,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 138,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 139,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 140,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 141,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 142,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 143,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 144,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 145,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 146,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 147,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 148,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 149,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 150,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 151,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 152,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 153,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 154,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 155,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 156,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 157,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 158,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 159,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 160,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 161,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 162,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 163,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 164,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 165,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 166,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 167,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 168,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 169,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 170,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 171,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 172,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 173,
+                title: '',
+                image: 'Images/',
+                description: '',
+            },
+            {
+                id: 174,
+                title: '',
+                image: '',
+                description: '',
+            },
+            {
+                id: 175,
+                title: 'Tanzania',
+                image: 'Images/Tanzania.png',
+                description: '',
+            },
+            {
+                id: 176,
+                title: 'Thailand',
+                image: 'Images/Thailand.png',
+                description: '',
+            },
+            {
+                id: 177,
+                title: 'Timor Leste',
+                image: 'Images/Timor-Leste.png',
+                description: '',
+            },
+            {
+                id: 178,
+                title: 'Tonga',
+                image: 'Images/Tonga.png',
+                description: '',
+            },
+            {
+                id: 179,
+                title: 'Trinidad and Tobago',
+                image: 'Images/Trinidad-and-Tobago.png',
+                description: '',
+            },
+            {
+                id: 180,
+                title: 'Tunisia',
+                image: 'Images/Tunisia.png',
+                description: '',
+            },
+            {
+                id: 181,
+                title: 'Turkey',
+                image: 'Images/Turkey.png',
+                description: '',
+            },
+            {
+                id: 182,
+                title: 'Turkmenistan',
+                image: 'Images/Turkmenistan.png',
+                description: '',
+            },
+            {
+                id: 183,
+                title: 'Tuvalu',
+                image: 'Images/Tuvalu.png',
+                description: '',
+            },
+            {
+                id: 184,
+                title: 'Uganda',
+                image: 'Images/Uganda.png',
+                description: '',
+            },
+            {
+                id: 185,
+                title: 'Ukraine',
+                image: 'Images/Ukraine.png',
+                description: '',
+            },
+            {
+                id: 186,
+                title: 'United Arab Emirates',
+                image: 'Images/United-Arab-Emirates.png',
+                description: '',
+            },
+            {
+                id: 187,
+                title: 'United Kingdom',
+                image: 'Images/United-Kingdom.png',
+                description: '',
+            },
+            {
+                id: 188,
+                title: 'United States of America',
+                image: 'Images/United-States-of-America.png',
+                description: '',
+            },
+            {
+                id: 189,
+                title: 'Uruguay',
+                image: 'Images/Uruguay.png',
+                description: '',
+            },
+            {
+                id: 190,
+                title: 'Uzbekistan',
+                image: 'Images/Uzbekistan.png',
+                description: '',
+            },
+            {
+                id: 191,
+                title: 'Vanuatu',
+                image: 'Images/Vanuatu.png',
+                description: '',
+            },
+            {
+                id: 192,
+                title: 'Vatican City',
+                image: 'Images/Vatican-City.png',
+                description: '',
+            },
+            {
+                id: 193,
+                title: 'Venezuela',
+                image: 'Images/Venezuela.png',
+                description: '',
+            },
+            {
+                id: 194,
+                title: 'Vietnam',
+                image: 'Images/Vietnam.png',
+                description: '',
+            },
+            {
+                id: 195,
+                title: 'Yemen',
+                image: 'Images/Yemen.png',
+                description: '',
+            },
+            {
+                id: 196,
+                title: 'Zambia',
+                image: 'Images/Zambia.png',
+                description: '',
+            },
+            {
+                id: 197,
+                title: 'Zimbabwe',
+                image: 'Images/Zimbabwe.png',
+                description: '',
+            },
+        ],
+    },
+    computed: {
+        filteredCards() {
+            return this.cards.filter((card) => {
+                return card.title.toLowerCase().includes(this.searchQuery.toLowerCase());
+            });
+        },
+    },
+    methods: {
+        showModal(card) {
+            this.selectedCard = card;
+            this.descriptionInput = card.description;
+        },
+        closeModal() {
+            this.selectedCard = null;
+        },
+        saveCard() {
+            if (this.selectedCard) {
+                this.selectedCard.description = this.descriptionInput;
+
+                const sharedCard = indexApp.upcomingTrips.find((card) => card.id === this.selectedCard.id);
+                if (sharedCard) {
+                    sharedCard.description = this.descriptionInput;
+                }
+
+                this.descriptionInput = '';
+                this.selectedCard = null;
+            }
+        },
+    },
 });
 
 
